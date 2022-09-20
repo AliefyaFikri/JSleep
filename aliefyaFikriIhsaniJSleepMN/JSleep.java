@@ -6,50 +6,50 @@ public class JSleep {
         
     }
     
-    public int getHotelId(){
+    public static int getHotelId(){
         return 0;
     }
     
-    public String getHotelName(){
+    public static String getHotelName(){
         return "hotel";
     }
     
-    public boolean isDiscount(){
+    public static boolean isDiscount(){
         return true;
     }
     
-    public float getDiscountPercentage(int beforeDiscount, int afterDiscount){
+    public static float getDiscountPercentage(int beforeDiscount, int afterDiscount){
         if(beforeDiscount<afterDiscount){
             return 0.0f;
         }
         else {
-            return ((beforeDiscount-afterDiscount)/10) ;
+            return (float) ((beforeDiscount-afterDiscount)/10.f) ;
         }
     }
     
-    public int getDiscountedPrice(int price, float discountPercentage){
+    public static int getDiscountedPrice(int price, float discountPercentage){
         if (discountPercentage > 100.0f){
             return 0;
         } else {
-            return price - (int) (price * discountPercentage);
+            return price - (int) (price * (discountPercentage/100.0f));
         }
     }
     
-    public int getOriginalPrice(int discountedPrice, float discountPercentage){
-        return discountedPrice + (int) (discountedPrice * discountPercentage);
+    public static int getOriginalPrice(int discountedPrice, float discountPercentage){
+        return (int) (discountedPrice / ( 1.0f- (discountPercentage / 100.0f)));
     }
     
-    public float getAdminFeePercentage(){
+    public static float getAdminFeePercentage(){
         return 0.05f;
 
     }
     
-    public int getAdminFee(int price){
+    public static int getAdminFee(int price){
         return (int) (getAdminFeePercentage() * price);
 
     }
     
-    public int getTotalPrice(int price, int numberOfNight){
+    public static int getTotalPrice(int price, int numberOfNight){
         return (price * numberOfNight) + getAdminFee(price * numberOfNight);
     }
 }
