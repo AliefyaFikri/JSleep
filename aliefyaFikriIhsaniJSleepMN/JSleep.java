@@ -4,21 +4,27 @@ package aliefyaFikriIhsaniJSleepMN;
 public class JSleep {
     
     public static void main (String[] args){
-        Room test = createRoom();
+        
+        Payment testRoom = new Payment(1, 1, 1, "", 1, "", "");
+        Invoice testInvoice = new Invoice(2,2,2, "");
+        System.out.println(testRoom.print());
+        System.out.println(testInvoice.print()); 
+ 
+/*        Room test = createRoom();
         
         System.out.println(test.name);
         System.out.println(test.size);
         System.out.println(test.price.price);
         System.out.println(test.facility);        
-        
+ */       
     }
     
-    public static Room createRoom(){
+/*   public static Room createRoom(){
         Price price =  new Price (100000,5);
-        Room room = new Room("kamar hotel", 30, price, Facility.WiFi);
+        Room room = new Room(210,"kamar hotel", 30, price, Facility.WiFi);
         return room;
     }
-    
+   
     public static int getHotelId(){
         return 0;
     }
@@ -65,4 +71,5 @@ public class JSleep {
     public static int getTotalPrice(int price, int numberOfNight){
         return (price * numberOfNight) + getAdminFee(price * numberOfNight);
     }
+*/
 }
