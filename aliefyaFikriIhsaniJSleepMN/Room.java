@@ -18,6 +18,7 @@ public class Room extends Serializable
         this.price = price;
         this.address = address;
         this.city = city;
+        this.bedType = BedType.SINGLE;
     }
     
     public String toString(){
@@ -25,6 +26,7 @@ public class Room extends Serializable
                    "\nSize: " + size +
                    "\nPrice: " + price +
                    "\nFacility: " + facility +
+                   "\nBed Type: " + bedType +
                    "\nCity: " + city +
                    "\nAddress: " + address;
         return print;
