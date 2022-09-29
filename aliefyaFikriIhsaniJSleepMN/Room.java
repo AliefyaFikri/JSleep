@@ -24,7 +24,7 @@ public class Room extends Serializable
     public String toString(){
         String print = "Name: " + name +
                    "\nSize: " + size +
-                   "\nPrice: " + price +
+                   "\n" + price +
                    "\nFacility: " + facility +
                    "\nBed Type: " + bedType +
                    "\nCity: " + city +
