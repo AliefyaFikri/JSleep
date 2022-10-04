@@ -1,6 +1,6 @@
 package aliefyaFikriIhsaniJSleepMN;
 
-public class Room extends Serializable
+public class Room extends Serializable implements FileParser
 {
     public int size;
     public String name;
@@ -30,5 +30,12 @@ public class Room extends Serializable
                    "\nCity: " + city +
                    "\nAddress: " + address;
         return print;
+    }
+    
+    public Object write(){
+        return null;
+    }
+    public boolean read(String content){
+        return false;
     }
 }

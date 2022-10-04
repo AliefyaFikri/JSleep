@@ -1,26 +1,32 @@
 package aliefyaFikriIhsaniJSleepMN;
+import java.util.Calendar;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class Payment extends Invoice
 {
     
-    public String to;
-    public String from;
+    public Calendar to;
+    public Calendar from;
     private int roomId;
     
-    public Payment (int id, int buyerId, int renterId, String time, int roomId, String from, String to){
-        super(id, buyerId, renterId, time);
+    public Payment (int id, int buyerId, int renterId, int roomId){
+        super(id, buyerId, renterId);
         this.time = time;
         this.roomId = roomId;
-        this.from = from;
-        this.to = to;
+        this.from = Calendar.getInstance();
+        this.to = Calendar.getInstance();
+        this.to.add(Calendar.DATE, 2);
         
     }
     
-    public Payment (int id, Account buyer, Renter renter, String time, int roomId, String from, String to){
-        super(id, buyer, renter, time);
+    public Payment (int id, Account buyer, Renter renter, int roomId){
+        super(id, buyer, renter);
+        this.time = time;
         this.roomId = roomId;
-        this.from = from;
-        this.to = to;
+        this.from = Calendar.getInstance();
+        this.to = Calendar.getInstance();
+        this.to.add(Calendar.DATE, 2);
     }
     
      public String print() {
@@ -31,5 +37,15 @@ public class Payment extends Invoice
     
     public int getRoomId(){
         return roomId;
+    }
+    
+    public String getTime(){
+        SimpleDateFormat Duration = new SimpleDateFormat("'Formatted Date= 'dd MMMMM yyyy");
+        return Duration.format(time.getTime());
+    }
+    
+    public String getDuration(){
+        SimpleDateFormat Duration = new SimpleDateFormat("dd MMMMM yyyy");
+        return Duration.format(from.getTime()) + " - " + Duration.format(to.getTime());
     }
 }
