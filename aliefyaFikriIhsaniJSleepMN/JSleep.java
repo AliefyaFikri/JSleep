@@ -1,11 +1,32 @@
 package aliefyaFikriIhsaniJSleepMN;
-
+import java.sql.*;
 
 public class JSleep {
     
+        
+    public static Room createRoom(){
+        Price price =  new Price (100000,5);
+        Room room = new Room(210,"kamar hotel", 30, price, Facility.WiFi, City.DEPOK, "Jalan Margonda Raya");
+        return room;
+    }
+    
     public static void main (String[] args){
         
-        Payment testPayment = new Payment(2, 2, 2,2);
+        Room RoomA = JSleep.createRoom();
+        Room RoomB = JSleep.createRoom();
+        System.out.println("Membuat booking dari tanggal 15 hingga 18");
+        Date start = Date.valueOf("2022-8-15");
+        Date end = Date.valueOf("2022-8-20");
+        System.out.println(Payment.makeBooking(start, end,RoomA));
+        System.out.println("Membuat booking dari tanggal 15 hingga 18");
+        Date start2 = Date.valueOf("2022-8-18");
+        Date end2 = Date.valueOf("2022-8-20");
+        System.out.println(Payment.makeBooking(start2, end2,RoomA));
+        System.out.println("Membuat booking dari tanggal 15 hingga 18 untuk kamar berbeda");
+        Date start3 = Date.valueOf("2022-8-18");
+        Date end3 = Date.valueOf("2022-8-20");
+        System.out.println(Payment.makeBooking(start3, end3,RoomB));
+/*        Payment testPayment = new Payment(2, 2, 2,2);
         System.out.println(testPayment.getTime());
         System.out.println(testPayment.getDuration());
         Price[] unfilteredArray = new Price[5];
@@ -21,6 +42,7 @@ public class JSleep {
         System.out.println(Validate.filter(unfilteredArray, 12000,true));
         System.out.println("Above 10000.0");
         System.out.println(Validate.filter(unfilteredArray, 10000,false));
+*/
 /*       
         Complaint testComplain = new Complaint(1,"23 August 2022","Bad Quality");
         Price testPrice = new Price(100000, 20000);
@@ -51,13 +73,8 @@ public class JSleep {
         System.out.println(test.facility);        
  */       
     }
-    
-/*   public static Room createRoom(){
-        Price price =  new Price (100000,5);
-        Room room = new Room(210,"kamar hotel", 30, price, Facility.WiFi);
-        return room;
-    }
-   
+
+/*   
     public static int getHotelId(){
         return 0;
     }
