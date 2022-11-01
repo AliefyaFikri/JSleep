@@ -2,9 +2,10 @@ package aliefyaFikriIhsaniJSleepMN;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Room extends Serializable implements FileParser
+public class Room extends Serializable
 {
     public int size;
+    public int accountId;
     public String name;
     public Facility facility;
     public Price price;
@@ -13,7 +14,7 @@ public class Room extends Serializable implements FileParser
     public String address;
     public ArrayList<Date> booked;
     
-    public Room(String name, int size, Price price, Facility facility, City city, String address){
+    public Room(String name, int accountId, int size, Price price, Facility facility, City city, String address){
         super();
         this.name = name;
         this.size = size;
@@ -32,7 +33,7 @@ public class Room extends Serializable implements FileParser
                 "\nBed Type: " + bedType +
                 "\nCity: " + city +
                 "\nAddress: " + address +
-                "\nId: " + id ;
+                "\nId: " + accountId ;
         return print;
     }
     
