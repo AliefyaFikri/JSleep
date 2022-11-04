@@ -1,4 +1,5 @@
 package aliefyaFikriIhsaniJSleepMN;
+import java.awt.*;
 import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -40,7 +41,7 @@ public class JSleep {
             e.printStackTrace();
         }
 
- */
+
         Renter testRegex = new Renter("Netlab_", "089535975704", "Jl Margonda Raya");
         Renter testRegexFail = new Renter("netlab", "081", "Jalan");
         System.out.println(testRegex.validate());
@@ -55,6 +56,21 @@ public class JSleep {
         catch (Throwable t){
             t.printStackTrace();
         }
+*/
+        try{
+            String filepath="C:\\Java\\OOP\\JSleep\\src\\aliefyaFikriIhsaniJSleepMN\\json\\account.json";
+            JsonTable<Account> tableAccount = new JsonTable<>(Account.class, filepath);
+            tableAccount.add(new Account("name","email","password"));
+            tableAccount.writeJson();
+            tableAccount.forEach(Account-> System.out.println(tableAccount.toString()));
+        }
+        catch (Throwable t){
+            t.printStackTrace();
+        }
+
+        for(int i = 0; i < 10; i++){
+            ThreadingObject thread = new ThreadingObject("Thread " + i);
+            thread.start();}
 
 }
 }

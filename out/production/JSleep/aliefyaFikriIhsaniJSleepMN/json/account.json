@@ -1,0 +1,1 @@
+[{"name":"name","email":"email","REGEX_EMAIL":"^[A-Za-z0-9]+[A-Za-z0-9]+@+[A-Za-z]+.+[A-Za-z]$","REGEX_PASSWORD":"^(?\u003d.*?[a-z])(?\u003d.*?[A-Z])(?\u003d.*?[0-9]).{8,}$","password":"password","id":0}]
