@@ -1,5 +1,7 @@
 package com.aliefyaFikriIhsaniJSleepMN;
-import java.util.Calendar;
+
+import com.aliefyaFikriIhsaniJSleepMN.dbjson.Serializable;
+
 import java.util.Date;
 
 public class Invoice extends Serializable

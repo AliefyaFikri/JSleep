@@ -1,4 +1,4 @@
-package com.aliefyaFikriIhsaniJSleepMN;
+package com.aliefyaFikriIhsaniJSleepMN.dbjson;
 import java.util.HashMap;
 
 /**
@@ -8,7 +8,7 @@ import java.util.HashMap;
  * @version (a version number or a date)
  */
 
-public class Serializable {
+public class Serializable implements Comparable<Serializable> {
     public final int id;
     private static HashMap<Class<?>, Integer> mapCounter = new HashMap<Class<?>, Integer>();
 

@@ -1,4 +1,4 @@
-package com.aliefyaFikriIhsaniJSleepMN;
+package com.aliefyaFikriIhsaniJSleepMN.dbjson;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;

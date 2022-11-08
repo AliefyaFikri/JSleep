@@ -1,4 +1,10 @@
 package com.aliefyaFikriIhsaniJSleepMN;
+import com.aliefyaFikriIhsaniJSleepMN.BedType;
+import com.aliefyaFikriIhsaniJSleepMN.City;
+import com.aliefyaFikriIhsaniJSleepMN.Facility;
+import com.aliefyaFikriIhsaniJSleepMN.Price;
+import com.aliefyaFikriIhsaniJSleepMN.dbjson.Serializable;
+
 import java.util.ArrayList;
 import java.util.Date;
 

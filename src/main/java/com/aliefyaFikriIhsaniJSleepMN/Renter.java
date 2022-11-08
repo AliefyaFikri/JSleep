@@ -1,5 +1,7 @@
 package com.aliefyaFikriIhsaniJSleepMN;
 
+import com.aliefyaFikriIhsaniJSleepMN.dbjson.Serializable;
+
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 

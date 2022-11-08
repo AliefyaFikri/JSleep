@@ -1,42 +1,45 @@
 package com.aliefyaFikriIhsaniJSleepMN;
 
+import com.aliefyaFikriIhsaniJSleepMN.dbjson.Serializable;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+public class Account extends Serializable
+{
 
-public class Account extends Serializable{
-    
     public String name;
     public String email;
-    public final String REGEX_EMAIL = "^[A-Za-z0-9]+[A-Za-z0-9]+@+[A-Za-z]+.+[A-Za-z]$";
-    public final String REGEX_PASSWORD = "^(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9]).{8,}$";
     public String password;
-    
+
+    public static final String REGEX_EMAIL = "^[A-Z0-9._%+-]@[A-Za-z.-]\\.[a-z]$";
+
+
+    public static final String REGEX_PASSWORD = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])*[a-zA-Z\\d]{8,}$";
+
+
     public Account (String name, String email, String password){
         super();
         this.name = name;
         this.email = email;
         this.password = password;
     }
-
     public boolean validate(){
+        Pattern patternEmail = Pattern.compile(this.REGEX_EMAIL);
+        Matcher matcherEmail = patternEmail.matcher(this.email);
+        boolean matchFoundEmail = matcherEmail.find();
 
-        Pattern patEmail = Pattern.compile(REGEX_EMAIL);
-        Matcher matEmail = patEmail.matcher(email);
-        boolean mailFound = matEmail.find();
+        Pattern patternPassword = Pattern.compile(this.REGEX_PASSWORD);
+        Matcher matcherPassword = patternPassword.matcher(this.name);
+        boolean matchFoundPassword = matcherPassword.find();
 
-        Pattern patPass = Pattern.compile(REGEX_PASSWORD);
-        Matcher matPass = patPass.matcher(password);
-        boolean passFound =  matPass.find();
+        return matchFoundEmail && matchFoundPassword;
 
-        return mailFound && passFound;
     }
-    
     public String toString(){
-        String print = "Name: " + name +
-                   "\nEmail: " + email +
-                   "\nPassword: " + password+
-                    "\nID: 0\n";
-        return print;
-    }
+        return "Account{name='"+name+"', email='"+email+"', password='"+password+"', id='"+id+"'}";
 
+
+
+
+    }
 }

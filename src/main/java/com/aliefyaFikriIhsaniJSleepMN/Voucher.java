@@ -1,5 +1,9 @@
 package com.aliefyaFikriIhsaniJSleepMN;
 
+import com.aliefyaFikriIhsaniJSleepMN.Price;
+import com.aliefyaFikriIhsaniJSleepMN.Type;
+import com.aliefyaFikriIhsaniJSleepMN.dbjson.Serializable;
+
 public class Voucher extends Serializable
 {
     public String name;

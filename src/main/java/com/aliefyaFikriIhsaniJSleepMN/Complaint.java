@@ -1,6 +1,8 @@
 package com.aliefyaFikriIhsaniJSleepMN;
 
-public class Complaint extends Serializable{
+import com.aliefyaFikriIhsaniJSleepMN.dbjson.Serializable;
+
+public class Complaint extends Serializable {
 
     public String desc;
     public String date;
