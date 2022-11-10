@@ -15,6 +15,7 @@ public class Account extends Serializable
 
 
     public static final String REGEX_PASSWORD = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])*[a-zA-Z\\d]{8,}$";
+    public double balance;
 
 
     public Account (String name, String email, String password){

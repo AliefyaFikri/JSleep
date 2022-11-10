@@ -1,7 +1,5 @@
 package com.aliefyaFikriIhsaniJSleepMN;
 
-import com.aliefyaFikriIhsaniJSleepMN.Price;
-import com.aliefyaFikriIhsaniJSleepMN.Type;
 import com.aliefyaFikriIhsaniJSleepMN.dbjson.Serializable;
 
 public class Voucher extends Serializable
@@ -28,8 +26,8 @@ public class Voucher extends Serializable
         return this.used;
     }
     
-    public boolean canApply(Price price){
-        if (price.price >= minimum && used == false){
+    public boolean canApply(double price){
+        if (price >= minimum && used == false){
             return true;
         } else {
             return false;

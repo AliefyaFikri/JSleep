@@ -2,30 +2,29 @@ package com.aliefyaFikriIhsaniJSleepMN;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.text.SimpleDateFormat;
 
 public class Payment extends Invoice
 {
     
-    public Date to;
-    public Date from;
+    public String to;
+    public String from;
     private int roomId;
     
-    public Payment (int id, int buyerId, int renterId, int roomId, Date from, Date to){
-        super(id, buyerId, renterId);
+    public Payment (Account buyerId, Room renterId, int roomId, String from, String to){
+        super();
         this.roomId = roomId;
         this.from = from;
         this.to = to;
     }
     
-    public Payment (int id, Account buyer, Renter renter, int roomId, Date from, Date to){
-        super(id, buyer, renter);
+    public Payment (Account buyer, Renter renter, int roomId, String from, String to){
+        super(buyer, renter);
         this.roomId = roomId;
         this.from = from;
         this.to = to;
     }
-    
-     public String print() {
+
+    public String print() {
         String print = "\nRoom Id : " + roomId + "\nFrom : " + from + "\nTo : " + to;
         return print;
     }
@@ -33,12 +32,6 @@ public class Payment extends Invoice
     public int getRoomId()
     {
         return roomId;
-    }
-    
-    public String getTime(){
-        SimpleDateFormat Duration = new SimpleDateFormat("'Formatted Date= 'dd MMMMM yyyy");
-        String formattedFrom = Duration.format(time.getTime());
-        return formattedFrom;
     }
 
     public static boolean availability (Date from, Date to, Room room){
@@ -52,24 +45,19 @@ public class Payment extends Invoice
         }
         return true;
     }
-    
-    public static boolean makeBooking(Date from, Date to, Room room){
-        SimpleDateFormat Duration = new SimpleDateFormat("dd MMMMM yyyy");
-        String formattedFrom = Duration.format(from.getTime());
-        String formattedTo = Duration.format(to.getTime());
-        Calendar c = Calendar.getInstance();
-        
+    public static boolean makeBooking(Date from,Date to,Room room){
         if(availability(from, to, room)){
-            while(from.before(to)){
-                room.booked.add(from);
-                c.setTime(from);
-                c.add(Calendar.DATE, 1);
-                from = c.getTime();
+            Calendar start = Calendar.getInstance();
+            start.setTime(from);
+            Calendar end = Calendar.getInstance();
+            end.setTime(to);
+            for (Date date = start.getTime(); start.before(end); start.add(Calendar.DATE, 1), date = start.getTime()) {
+                room.booked.add(date);
             }
             return true;
-        }else{
-            return false;
         }
+        return false;
     }
- 
+
+
 }

@@ -1,8 +1,4 @@
 package com.aliefyaFikriIhsaniJSleepMN;
-import com.aliefyaFikriIhsaniJSleepMN.BedType;
-import com.aliefyaFikriIhsaniJSleepMN.City;
-import com.aliefyaFikriIhsaniJSleepMN.Facility;
-import com.aliefyaFikriIhsaniJSleepMN.Price;
 import com.aliefyaFikriIhsaniJSleepMN.dbjson.Serializable;
 
 import java.util.ArrayList;
@@ -14,13 +10,13 @@ public class Room extends Serializable
     public int accountId;
     public String name;
     public Facility facility;
-    public Price price;
+    public int price;
     public City city;
     public BedType bedType;
     public String address;
     public ArrayList<Date> booked;
     
-    public Room(String name, int accountId, int size, Price price, Facility facility, City city, String address){
+    public Room(String name, int accountId, int size, int price, Facility facility, City city, String address){
         super();
         this.name = name;
         this.size = size;
