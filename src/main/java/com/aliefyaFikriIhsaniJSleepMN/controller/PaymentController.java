@@ -55,22 +55,26 @@ public class PaymentController implements BasicGetController<Payment>{
 
     @PostMapping("/{id}/accept")
     public boolean accept(
-
+            @PathVariable int id
     ){
+        Payment payment = Algorithm.<Payment>find(paymentTable, predicate -> predicate.id == id);
+        if(payment != null){
+            payment.status = Invoice.PaymentStatus.valueOf("ACCEPTED");
+            return true;
+        }
         return false;
     }
+
 
     @PostMapping("/{id}/cancel")
     public boolean cancel(
-
+            @PathVariable int id
     ){
-        return false;
-    }
-
-    @PostMapping("/{id}/submit")
-    public boolean submit(
-
-    ){
+        Payment payment = Algorithm.<Payment>find(paymentTable, predicate -> predicate.id == id);
+        if(payment != null){
+            payment.status = Invoice.PaymentStatus.valueOf("CANCELLED");
+            return true;
+        }
         return false;
     }
 
