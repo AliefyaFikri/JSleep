@@ -49,7 +49,7 @@ public class AccountController implements BasicGetController<Account>
 
     @JsonAutowired
             (value = Account.class,
-    filepath = "\"C:\\Java\\OOP\\JSleep\\src\\aliefyaFikriIhsaniJSleepMN\\json\\account.json\"")
+    filepath = "C:\\Java\\OOP\\JSleep\\src\\aliefyaFikriIhsaniJSleepMN\\json\\account.json")
     public JsonTable<Account> getJsonTable() {
         return accountTable;
     }

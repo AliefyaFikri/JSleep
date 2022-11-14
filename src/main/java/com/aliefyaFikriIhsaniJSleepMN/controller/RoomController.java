@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/Room")
 public class RoomController implements BasicGetController<Room> {
 
-    @JsonAutowired(value = Room.class, filepath = "\"C:\\Java\\OOP\\JSleep\\src\\aliefyaFikriIhsaniJSleepMN\\json\\room.json\"")
+    @JsonAutowired(value = Room.class, filepath = "C:\\Java\\OOP\\JSleep\\src\\aliefyaFikriIhsaniJSleepMN\\json\\room.json")
     public static JsonTable<Room> roomTable;
 
     public JsonTable<Room> getJsonTable() {

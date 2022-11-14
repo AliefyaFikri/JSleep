@@ -16,7 +16,7 @@ public class PaymentController implements BasicGetController<Payment>{
 
     @JsonAutowired
     (value= Payment.class,
-    filepath = "\"C:\\Java\\OOP\\JSleep\\src\\aliefyaFikriIhsaniJSleepMN\\json\\payment.json\"")
+            filepath = "C:\\Java\\OOP\\JSleep\\src\\aliefyaFikriIhsaniJSleepMN\\json\\payment.json")
 
     public static JsonTable<Payment> paymentTable;
 
