@@ -8,6 +8,8 @@ import com.aliefyaFikriIhsaniJSleepMN.dbjson.JsonTable;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,39 +23,17 @@ import java.util.regex.Pattern;
 @RequestMapping("/account")
 public class AccountController implements BasicGetController<Account>
 {
-    public static final String REGEX_EMAIL = "^[A-Z0-9._%+-]@[A-Za-z.-]\\.[a-z]$";
-    public static final Pattern REGEX_PATTERN_EMAIL = Pattern.compile(REGEX_EMAIL);
-    public static final String REGEX_PASSWORD = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])*[a-zA-Z\\d]{8,}$";
-    public static final Pattern REGEX_PATTERN_PASSWORD = Pattern.compile(REGEX_PASSWORD);
+    @JsonAutowired(value=Account.class,filepath="C:\\Java\\OOP\\JSleep\\src\\aliefyaFikriIhsaniJSleepMN\\json\\account.json")
     public static JsonTable<Account> accountTable;
+    public static final String REGEX_PASSWORD = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
+    public static final Pattern REGEX_PATTERN_PASSWORD = Pattern.compile(REGEX_PASSWORD);
+    public static final String REGEX_EMAIL = "^[a-zA-Z0-9 ][a-zA-Z0-9]+@[a-zA-Z.]+?\\.[a-zA-Z]+?$";
+    public static final Pattern REGEX_PATTERN_EMAIL = Pattern.compile(REGEX_EMAIL);
 
-    String hash (String password){
-        String generatedPassword = null;
-        try {
-            MessageDigest MD5 = MessageDigest.getInstance("MD5");
-            MD5.update(password.getBytes());
-            byte[] bytes = MD5.digest();
-            StringBuilder SB = new StringBuilder();
-            for(int i=0; i< bytes.length ;i++)
-            {
-                SB.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-            }
-            generatedPassword = SB.toString();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return generatedPassword;
-    }
-
-    @JsonAutowired
-            (value = Account.class,
-    filepath = "C:\\Java\\OOP\\JSleep\\src\\aliefyaFikriIhsaniJSleepMN\\json\\account.json")
+    @Override
     public JsonTable<Account> getJsonTable() {
         return accountTable;
     }
-
 
     @PostMapping("/register")
     Account register
@@ -63,75 +43,72 @@ public class AccountController implements BasicGetController<Account>
                     @RequestParam String password
             )
     {
-        Pattern patternEmail = Pattern.compile(this.REGEX_EMAIL);
-        Matcher matcherEmail = patternEmail.matcher(email);
-        boolean matchFoundEmail = matcherEmail.find();
+        final String generatedPass;
+        Matcher matcher_email = REGEX_PATTERN_EMAIL.matcher(email);
+        Matcher matcher_password = REGEX_PATTERN_PASSWORD.matcher(password);
+        Account findEmail = Algorithm.<Account> find(getJsonTable(), pred -> Objects.equals(pred.email, email));
 
-        Pattern patternPassword = Pattern.compile(this.REGEX_PASSWORD);
-        Matcher matcherPassword = patternPassword.matcher(password);
-        boolean matchFoundPassword = matcherPassword.find();
-
-        Account account = Algorithm.<Account> find(getJsonTable(),predicate -> predicate.email.equals(email));
-
-        String generatedPassword;
-        if (matcherEmail == null) {
-            generatedPassword = hash(password);
-            account = new Account(name, email, generatedPassword);
-            getJsonTable().add(account);
+        if(matcher_email.find() && matcher_password.find() && !name.isBlank() && findEmail == null){
+            generatedPass = hashPassword(password);
+            Account account = new Account(name, email, generatedPass);
+            accountTable.add(account);
             return account;
-        } else {
-            return null;
         }
+        return null;
     }
 
     @PostMapping("/login")
-    Account login
-            (
-                    @RequestParam String email,
-                    @RequestParam String password
-            )
-    {
-        Account account = Algorithm.<Account>find(accountTable, predicate -> predicate.email.equals(email) && predicate.password.equals(password));
-        String generatedPassword = hash(password);
-            if (account != null){
-                if(account.password.equals(password)){
-                    return account;
-                }
-            }
-            return null;
+    Account login(
+            @RequestParam String email,
+            @RequestParam String password
+    ) {
+        final String generatedPass = hashPassword(password);
+        return Algorithm.<Account>find(accountTable, pred -> Objects.equals(pred.email, email) && Objects.equals(pred.password, generatedPass));
     }
 
-    @PostMapping("/{id}/topUp")
+    @PostMapping("/registerRenter")
+    Renter registerRenter(
+            @PathVariable int id,
+            @RequestParam String name,
+            @RequestParam String address,
+            @RequestParam String phoneNumber
+    ) { Account test = Algorithm.<Account>find(getJsonTable(), pred -> pred.id == id);
+        if(test.renter == null){
+            test.renter = new Renter(name, address, phoneNumber);
+            return test.renter;
+        }
+        return null;
+    }
+
+    @PostMapping("/topUp")
     boolean topUp
             (
                     @PathVariable int id,
                     @RequestParam double balance
             )
     {
-        Account account = Algorithm.<Account>find(getJsonTable(), predicate -> predicate.id == id);
-        if (account != null){
+        Account account = Algorithm.<Account>find(getJsonTable(), pred -> pred.id == id);
+        if(account != null && balance > 0){
             account.balance += balance;
             return true;
         }
         return false;
     }
 
-    @PostMapping("/{id}/registerRenter")
-    Renter registerRenter
-            (
-                    @PathVariable int id,
-                    @RequestParam String name,
-                    @RequestParam String address,
-                    @RequestParam String phoneNumber
-            )
-    {
-        Account account = Algorithm.<Account>find(accountTable, predicate -> predicate.id == id);
-        if (account != null){
-            Renter renter = new Renter(name, address, phoneNumber);
-            return renter;
+    private static String hashPassword(String password){
+        String hashedPass = null;
+        try{
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(password.getBytes());
+            byte[] bytes = md.digest();
+            StringBuilder sb = new StringBuilder();
+            for (byte aByte : bytes) {
+                sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
+            }
+            hashedPass = sb.toString();
+        }catch(NoSuchAlgorithmException e){
+            e.printStackTrace();
         }
-        return null;
+        return hashedPass;
     }
-
-
 }

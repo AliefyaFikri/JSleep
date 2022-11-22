@@ -10,6 +10,7 @@ public class Account extends Serializable
     public String name;
     public String email;
     public String password;
+    public Renter renter;
 
     public static final String REGEX_EMAIL = "^[A-Z0-9._%+-]@[A-Za-z.-]\\.[a-z]$";
 
