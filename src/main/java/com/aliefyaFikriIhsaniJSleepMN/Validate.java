@@ -2,10 +2,10 @@ package com.aliefyaFikriIhsaniJSleepMN;
 import java.util.ArrayList;
 
 /**
- * Write a description of class Validate here.
+ * Kelas Validate berfungsi sebagai kelas yang berisi fungsi-fungsi yang digunakan untuk memvalidasi inputan user
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Aliefya Fikri Ihsani
+ * @version 1.0
  */
 
 public class Validate {

@@ -7,6 +7,12 @@ import com.google.gson.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * Kelas JSleep berfungsi sebagai kelas yang menjalankan program
+ *
+ * @author Aliefya Fikri Ihsani
+ * @version 1.0
+ */
 @SpringBootApplication
 public class JSleep {
 

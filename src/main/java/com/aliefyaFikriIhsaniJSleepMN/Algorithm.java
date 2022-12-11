@@ -2,6 +2,12 @@ package com.aliefyaFikriIhsaniJSleepMN;
 
 import java.util.*;
 
+/**
+ * Kelas Algorithm berfungsi sebagai algoritma yang akan dipakai untuk mencari data
+ *
+ * @author Aliefya Fikri Ihsani
+ * @version 1.0
+ */
 public class Algorithm {
     private Algorithm() {
     }

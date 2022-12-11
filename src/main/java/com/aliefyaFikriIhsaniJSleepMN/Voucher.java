@@ -2,6 +2,12 @@ package com.aliefyaFikriIhsaniJSleepMN;
 
 import com.aliefyaFikriIhsaniJSleepMN.dbjson.Serializable;
 
+/** Kelas Voucher berfungsi sebagai kelas yang merepresentasikan voucher pada aplikasi
+ *
+ * @author Aliefya Fikri Ihsani
+ * @version 1.0
+ */
+
 public class Voucher extends Serializable
 {
     public String name;

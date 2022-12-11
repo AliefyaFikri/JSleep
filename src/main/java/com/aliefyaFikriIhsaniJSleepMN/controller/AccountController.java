@@ -18,6 +18,14 @@ import java.util.regex.Pattern;
 
 // TODO sesuaikan dengan package Anda: import com.netlabJSleepGS.Account;
 
+/**
+ * Kelas AccountController merupakan kelas yang berfungsi untuk mengatur
+ * proses register, login, register renter, dan top up
+ *
+ * @author Aliefya Fikri Ihsani
+ * @version 1.0
+ */
+
 
 @RestController
 @RequestMapping("/account")
@@ -35,6 +43,13 @@ public class AccountController implements BasicGetController<Account>
         return accountTable;
     }
 
+    /**
+     * Method register merupakan method yang berfungsi untuk melakukan register
+     *
+     * @param name merupakan username dari akun yang akan diregister
+     * @param email merupakan email dari akun yang akan diregister
+     * @param password merupakan password dari akun yang akan diregister
+     */
     @PostMapping("/register")
     Account register
             (
@@ -57,6 +72,12 @@ public class AccountController implements BasicGetController<Account>
         return null;
     }
 
+    /**
+     * Method login merupakan method yang berfungsi untuk melakukan login
+     *
+     * @param email merupakan email dari akun yang akan login
+     * @param password merupakan password dari akun yang akan login
+     */
     @PostMapping("/login")
     Account login(
             @RequestParam String email,
@@ -66,7 +87,15 @@ public class AccountController implements BasicGetController<Account>
         return Algorithm.<Account>find(accountTable, pred -> Objects.equals(pred.email, email) && Objects.equals(pred.password, generatedPass));
     }
 
-    @PostMapping("/registerRenter")
+    /**
+     * Method registerRenter merupakan method yang berfungsi untuk melakukan register renter
+     *
+     * @param id merupakan id dari akun yang akan diregister renter
+     * @param name merupakan username dari akun renter yang akan diregister
+     * @param address merupakan alamat dari akun renter yang akan diregister
+     * @param phoneNumber merupakan nomor telepon dari akun renter yang akan diregister
+     */
+    @PostMapping("/{id}/registerRenter")
     Renter registerRenter(
             @PathVariable int id,
             @RequestParam String name,
@@ -80,8 +109,14 @@ public class AccountController implements BasicGetController<Account>
         return null;
     }
 
-    @PostMapping("/topUp")
-    boolean topUp
+    /**
+     * Method topUp merupakan method yang berfungsi untuk melakukan top up
+     *
+     * @param id merupakan id dari akun yang akan melakukan top up
+     * @param balance merupakan besar uang yang akan ditop up
+     */
+    @PostMapping("{id}/topUp")
+    Account topUp
             (
                     @PathVariable int id,
                     @RequestParam double balance
@@ -90,9 +125,9 @@ public class AccountController implements BasicGetController<Account>
         Account account = Algorithm.<Account>find(getJsonTable(), pred -> pred.id == id);
         if(account != null && balance > 0){
             account.balance += balance;
-            return true;
+            return account;
         }
-        return false;
+        return null;
     }
 
     private static String hashPassword(String password){
